@@ -2,26 +2,35 @@ import React from 'react';
 import styles from '../styles/ProductCard.module.css';
 
 const ProductCard = ({ product }) => {
+  const removeProduct = (id) => {
+    //needs to remove the product when remove button is clicked
+    const productElement = document.getElementById(`product-${id}`);
+    if (productElement) {
+      productElement.remove();
+    }
+  }
   return (
     <>
-      <div>
+      <div id="productContainer">
       {
       /* TODO: Apply conditional class to <div> above for out-of-stock items */
       }
-        <div className={product.inStock ? '' : styles.outOfStockClass}>
+        <div className={product.inStock ? styles.inStock : styles.outOfStockClass} id={`product-${product.id}`}>
       {/* TODO: Display product name */}
-          <h2>{product.name}</h2>
+          <h3 id="productTitle">{product.name}</h3>
 
 
       {/* TODO: Display product price */}
-          <p>${product.price.toFixed(2)}</p>
+          <p id="productPrice">{product.price}</p>
 
       {/* TODO: Show if the product is in stock or out of stock | if out of stock use styles.outOfStock */}
-          <p>{product.inStock ? 'In Stock' : 'Out of Stock' }</p>
+          <p id="productAvailability">{product.inStock ? 'In Stock' : 'Out of Stock' }</p>
+          < button onClick={() => removeProduct(product.id)} >Remove</button>
         </div>
       </div>
     </>
   );
+  
 };
 
 export default ProductCard;
